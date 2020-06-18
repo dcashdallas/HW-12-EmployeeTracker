@@ -9,3 +9,25 @@ var connection = mysql.createConnection({
     database: "eetracker_db"
 });
 
+async function userPrompt() {
+    return inquirer
+        .prompt([
+            {
+                type: "list",
+                message: "What would you like to do?",
+                name: "action",
+                choices: [
+                    "Add role",
+                    "Add department",
+                    "Add employee",
+                    "View all departments",
+                    "View all roles",
+                    "View all employees",
+                    "Update employee role",
+                    "Exit"
+                ]
+            }
+        ])
+}
+
+userPrompt();

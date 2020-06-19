@@ -58,4 +58,21 @@ async function addEmployee(employeeInfo) {
     console.log(`Added employee ${employeeInfo.first_name} ${employeeInfo.last_name}.`);
 }
 
+async function viewAllDepartments() {
+    // SELECT * from department;
+
+    let query = "SELECT * FROM department";
+    const rows = await db.query(query);
+    console.table(rows);
+}
+
+async function viewAllRoles() {
+    console.log("");
+    // SELECT * FROM role;
+    let query = "SELECT * FROM role";
+    const rows = await db.query(query);
+    console.table(rows);
+    return rows;
+}
+
 userPrompt();

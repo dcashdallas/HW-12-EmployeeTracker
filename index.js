@@ -30,4 +30,32 @@ async function userPrompt() {
         ])
 }
 
+async function addRole(roleInfo) {
+    const departmentId = await getDepartmentId(roleInfo.departmentName);
+    const salary = roleInfo.salary;
+    const title = roleInfo.roleName;
+    let query = 'INSERT into role (title, salary, department_id) VALUES (?,?,?)';
+    let args = [title, salary, departmentId];
+    const rows = await db.query(query, args);
+    console.log(`Added role ${title}`);
+}
+
+async function addDepartment(departmentInfo) {
+    const departmentName = departmentInfo.departmentName;
+    let query = 'INSERT into department (name) VALUES (?)';
+    let args = [departmentName];
+    const rows = await db.query(query, args);
+    console.log(`Added department named ${departmentName}`);
+}
+
+async function addEmployee(employeeInfo) {
+    let roleId = await getRoleId(employeeInfo.role);
+    let managerId = await getEmployeeId(employeeInfo.manager);
+
+    let query = "INSERT into employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)";
+    let args = [employeeInfo.first_name, employeeInfo.last_name, roleId, managerId];
+    const rows = await db.query(query, args);
+    console.log(`Added employee ${employeeInfo.first_name} ${employeeInfo.last_name}.`);
+}
+
 userPrompt();

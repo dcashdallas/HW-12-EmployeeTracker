@@ -75,4 +75,14 @@ async function viewAllRoles() {
     return rows;
 }
 
+async function viewAllEmployees() {
+    console.log("");
+
+    // SELECT * FROM employee;
+    let query = "SELECT * FROM employee";
+    const rows = await db.query(query);
+    console.table(rows);
+}
+
+
 userPrompt();

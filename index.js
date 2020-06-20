@@ -111,5 +111,65 @@ async function getUpdateEmployeeRoleInfo() {
 
 }
 
+async function main() {
+    let exitLoop = false;
+    while (!exitLoop) {
+        const prompt = await userPrompt();
+
+        switch (prompt.action) {
+            case 'Add department': {
+                const newDepartmentName = await getDepartmentInfo();
+                await addDepartment(newDepartmentName);
+                break;
+            }
+
+            case 'Add role': {
+                const newRole = await getRoleInfo();
+                console.log("add a role");
+                await addRole(newRole);
+                break;
+            }
+
+            case 'Add employee': {
+                const newEmployee = await getAddEmployeeInfo();
+                console.log("add an employee");
+                console.log(newEmployee);
+                await addEmployee(newEmployee);
+                break;
+            }
+
+            case 'View all departments': {
+                await viewAllDepartments();
+                break;
+            }
+
+            case 'View all roles': {
+                await viewAllRoles();
+                break;
+            }
+
+            case 'View all employees': {
+                await viewAllEmployees();
+                break;
+            }
+
+            case 'Update employee role': {
+                const employee = await getUpdateEmployeeRoleInfo();
+                await updateEmployeeRole(employee);
+                break;
+            }
+
+            case 'Exit': {
+                exitLoop = true;
+                process.exit(0); // successful exit
+                return;
+            }
+
+            default:
+                console.log(`Internal warning. Shouldn't get here. action was ${prompt.action}`);
+        }
+    }
+}
+
 
 userPrompt();

@@ -84,5 +84,32 @@ async function viewAllEmployees() {
     console.table(rows);
 }
 
+async function getUpdateEmployeeRoleInfo() {
+    const employees = await getEmployeeNames();
+    const roles = await getRoles();
+    return inquirer
+        .prompt([
+            {
+                type: "list",
+                message: "Which employee do you want to update?",
+                name: "employeeName",
+                choices: [
+                    // populate from db
+                    ...employees
+                ]
+            },
+            {
+                type: "list",
+                message: "What is the employee's new role?",
+                name: "role",
+                choices: [
+                    // populate from db
+                    ...roles
+                ]
+            }
+        ])
+
+}
+
 
 userPrompt();

@@ -1,5 +1,7 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
+let Database = require("./async-db");
+let cTable = require("console.table");
 
 var db = mysql.createConnection({
     host: "localhost",
@@ -131,6 +133,17 @@ async function getAddEmployeeInfo() {
         ])
 }
 
+async function getEmployeeNames() {
+    let query = "SELECT * FROM employee";
+
+    const rows = await db.query(query);
+    let employeeNames = [];
+    for (const employee of rows) {
+        employeeNames.push(employee.first_name + " " + employee.last_name);
+    }
+    return employeeNames;
+}
+
 async function getUpdateEmployeeRoleInfo() {
     const employees = await getEmployeeNames();
     const roles = await getRoles();
@@ -203,6 +216,31 @@ async function getRoleId(roleName) {
     return rows[0].id;
 }
 
+async function getRoleInfo() {
+    const departments = await getDepartmentNames();
+    return inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the title of the new role?",
+                name: "roleName"
+            },
+            {
+                type: "input",
+                message: "What is the salary of the new role?",
+                name: "salary"
+            },
+            {
+                type: "list",
+                message: "Which department uses this role?",
+                name: "departmentName",
+                choices: [
+                    // populate from db
+                    ...departments
+                ]
+            }
+        ])
+}
 
 async function main() {
     let exitLoop = false;
@@ -270,32 +308,7 @@ process.on("exit", async function (code) {
 });
 
 
-class Database {
-    constructor(config) {
-        this.connection = mysql.createConnection(config);
-    }
-    query(sql, args) {
-        return new Promise((resolve, reject) => {
-            this.connection.query(sql, args, (err, rows) => {
-                if (err) {
-                    console.log(err.sql);
-                    console.log("");
-                    return reject(err);
-                }
-                resolve(rows);
-            });
-        });
-    }
-    close() {
-        return new Promise((resolve, reject) => {
-            this.connection.end(err => {
-                if (err)
-                    return reject(err);
-                resolve();
-            });
-        });
-    }
-}
+
 
 
 

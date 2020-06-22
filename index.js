@@ -3,7 +3,7 @@ var mysql = require("mysql");
 let Database = require("./async-db");
 let cTable = require("console.table");
 
-var db = mysql.createConnection({
+var db = new Database({
     host: "localhost",
     port: 3306,
     user: "root",
@@ -50,6 +50,16 @@ async function addDepartment(departmentInfo) {
     console.log(`Added department named ${departmentName}`);
 }
 
+async function getEmployeeId(fullName) {
+    // First split the name into first name and last name
+    let employee = getFirstAndLastName(fullName);
+
+    let query = 'SELECT id FROM employee WHERE employee.first_name=? AND employee.last_name=?';
+    let args = [employee[0], employee[1]];
+    const rows = await db.query(query, args);
+    return rows[0].id;
+}
+
 async function addEmployee(employeeInfo) {
     let roleId = await getRoleId(employeeInfo.role);
     let managerId = await getEmployeeId(employeeInfo.manager);
@@ -84,6 +94,21 @@ async function viewAllEmployees() {
     let query = "SELECT * FROM employee";
     const rows = await db.query(query);
     console.table(rows);
+}
+
+function getFirstAndLastName(fullName) {
+
+    let employee = fullName.split(" ");
+    if (employee.length == 2) {
+        return employee;
+    }
+
+    const last_name = employee[employee.length - 1];
+    let first_name = " ";
+    for (let i = 0; i < employee.length - 1; i++) {
+        first_name = first_name + employee[i] + " ";
+    }
+    return [first_name.trim(), last_name];
 }
 
 async function updateEmployeeRole(employeeInfo) {

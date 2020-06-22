@@ -1,7 +1,7 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
 
-var connection = mysql.createConnection({
+var db = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
@@ -170,6 +170,40 @@ async function getManagerNames() {
     return employeeNames;
 }
 
+async function getRoles() {
+    let query = "SELECT title FROM role";
+    const rows = await db.query(query);
+    //console.log("Number of rows returned: " + rows.length);
+
+    let roles = [];
+    for (const row of rows) {
+        roles.push(row.title);
+    }
+
+    return roles;
+}
+
+async function getDepartmentNames() {
+    let query = "SELECT name FROM department";
+    const rows = await db.query(query);
+    //console.log("Number of rows returned: " + rows.length);
+
+    let departments = [];
+    for (const row of rows) {
+        departments.push(row.name);
+    }
+
+    return departments;
+}
+
+async function getRoleId(roleName) {
+    let query = "SELECT * FROM role WHERE role.title=?";
+    let args = [roleName];
+    const rows = await db.query(query, args);
+    return rows[0].id;
+}
+
+
 async function main() {
     let exitLoop = false;
     while (!exitLoop) {
@@ -234,5 +268,35 @@ process.on("exit", async function (code) {
     await db.close();
     return console.log(`About to exit with code ${code}`);
 });
+
+
+class Database {
+    constructor(config) {
+        this.connection = mysql.createConnection(config);
+    }
+    query(sql, args) {
+        return new Promise((resolve, reject) => {
+            this.connection.query(sql, args, (err, rows) => {
+                if (err) {
+                    console.log(err.sql);
+                    console.log("");
+                    return reject(err);
+                }
+                resolve(rows);
+            });
+        });
+    }
+    close() {
+        return new Promise((resolve, reject) => {
+            this.connection.end(err => {
+                if (err)
+                    return reject(err);
+                resolve();
+            });
+        });
+    }
+}
+
+
 
 main();

@@ -1,7 +1,7 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
 let Database = require("./async-db");
-let cTable = require("console.table");
+// let cTable = require("console.table");
 
 var db = new Database({
     host: "localhost",
@@ -11,7 +11,51 @@ var db = new Database({
     database: "eetracker_db"
 });
 
+
+
+console.log(`
+                                NOMMMMMMMMMM$MR
+                          DM+..................$MMMMMNOI
+                       ,M+...................?$8+.+D??DNZ?NM+
+                      M.......................==....=D???????$D
+                    N?............................$D=.DII77II??I8
+                   M=.............................7DD.=Z?????+ZN?+
+                  +...................................N?????????NM
+                  M.........................=O?......O8OI????????OO
+                 7..........................$NN=....8????I8??????IO
+                 M.................................?8??????N?????N:
+                 M............................7N=..N??????8ND=.7
+                 O........................?Z8:,D...N??????7?.7.M
+                  M=................?ONZNN:    N...D7?????$?..M
+                   D.$NND88888D8OD?:   MNN  ,?+....D?????77N?
+                   M, MM  Z......D:,        ,7?......77??M
+                    7,  ,Z?........=8      ?D=.........N:
+                    D=8NN...........O +__===7..........8
+                    ZN+............._____.....=.......M
+                   =7......$O+................+ND.......+,
+                  N......+...D..............N?,N=........M
+                 M...........D...........=N=,==...........M   $MMMN,
+                N..........ID=..........N:,NNN.............ZM$.M+.INN7
+               N......ZDI=...........+D.MMMNM8MZ...........8=O=.....O8M,
+               ....$8  8............NNM,       78D........N............D
+               ...M   8..........+NMN         :...N.......7..........+NNM
+               =M7    M.......$NMI            M....N?....7=.........O..=
+                        :.~~~~               M.....O=..??.......88.....M
+                                              ?.....N..$........O.......M
+                                             M......D.D=.......?=.......D:
+                                           M.=D....II........8=.O........I
+                                         M..?7...O+........O..?D.......N
+                                        N...?7.7Z=........D=..N........8
+                                                                  
+                             Hello Smithers. You are quite good at turning me on
+                      Welcome to the Springfield Nuclear Plant Employee Traking System                     
+                            `
+
+);
+
+
 async function userPrompt() {
+
     return inquirer
         .prompt([
             {

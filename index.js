@@ -5,7 +5,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "",
+    password: "Sublime#96",
     database: "eetracker_db"
 });
 
@@ -84,6 +84,53 @@ async function viewAllEmployees() {
     console.table(rows);
 }
 
+async function updateEmployeeRole(employeeInfo) {
+
+    const roleId = await getRoleId(employeeInfo.role);
+    const employee = getFirstAndLastName(employeeInfo.employeeName);
+
+    let query = 'UPDATE employee SET role_id=? WHERE employee.first_name=? AND employee.last_name=?';
+    let args = [roleId, employee[0], employee[1]];
+    const rows = await db.query(query, args);
+    console.log(`Updated employee ${employee[0]} ${employee[1]} with role ${employeeInfo.role}`);
+}
+
+async function getAddEmployeeInfo() {
+    const managers = await getManagerNames();
+    const roles = await getRoles();
+    return inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "first_name",
+                message: "What is the employee's first name?"
+            },
+            {
+                type: "input",
+                name: "last_name",
+                message: "What is the employee's last name?"
+            },
+            {
+                type: "list",
+                message: "What is the employee's role?",
+                name: "role",
+                choices: [
+                    // populate from db
+                    ...roles
+                ]
+            },
+            {
+                type: "list",
+                message: "Who is the employee's manager?",
+                name: "manager",
+                choices: [
+                    // populate from db
+                    ...managers
+                ]
+            }
+        ])
+}
+
 async function getUpdateEmployeeRoleInfo() {
     const employees = await getEmployeeNames();
     const roles = await getRoles();
@@ -109,6 +156,18 @@ async function getUpdateEmployeeRoleInfo() {
             }
         ])
 
+}
+
+async function getManagerNames() {
+    let query = "SELECT * FROM employee WHERE manager_id IS NULL";
+
+    const rows = await db.query(query);
+    //console.log("number of rows returned " + rows.length);
+    let employeeNames = [];
+    for (const employee of rows) {
+        employeeNames.push(employee.first_name + " " + employee.last_name);
+    }
+    return employeeNames;
 }
 
 async function main() {
@@ -171,5 +230,9 @@ async function main() {
     }
 }
 
+process.on("exit", async function (code) {
+    await db.close();
+    return console.log(`About to exit with code ${code}`);
+});
 
-userPrompt();
+main();

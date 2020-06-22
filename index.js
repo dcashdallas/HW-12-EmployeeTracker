@@ -1,7 +1,8 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
-let Database = require("./async-db");
-// let cTable = require("console.table");
+var Database = require("./async-db");
+const chalk = require('chalk');
+
 
 var db = new Database({
     host: "localhost",
@@ -13,7 +14,7 @@ var db = new Database({
 
 
 
-console.log(`
+console.log((chalk.yellowBright(`
                                 NOMMMMMMMMMM$MR
                           DM+..................$MMMMMNOI
                        ,M+...................?$8+.+D??DNZ?NM+
@@ -48,9 +49,8 @@ console.log(`
                                         N...?7.7Z=........D=..N........8
                                                                   
                              Hello Smithers. You are quite good at turning me on
-                      Welcome to the Springfield Nuclear Plant Employee Traking System                     
-                            `
-
+                      Welcome to the Springfield Nuclear Plant Employee Tracking System                     
+                            `))
 );
 
 
@@ -63,12 +63,12 @@ async function userPrompt() {
                 message: "What would you like to do?",
                 name: "action",
                 choices: [
-                    "Add role",
-                    "Add department",
-                    "Add employee",
                     "View all departments",
                     "View all roles",
                     "View all employees",
+                    "Add employee",
+                    "Add role",
+                    "Add department",
                     "Update employee role",
                     "Exit"
                 ]
@@ -92,6 +92,17 @@ async function addDepartment(departmentInfo) {
     let args = [departmentName];
     const rows = await db.query(query, args);
     console.log(`Added department named ${departmentName}`);
+}
+
+async function getDepartmentInfo() {
+    return inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the name of the new department?",
+                name: "departmentName"
+            }
+        ])
 }
 
 async function getEmployeeId(fullName) {

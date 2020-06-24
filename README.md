@@ -1,6 +1,6 @@
 
 <h1 align="center">Employee Tracker</h1>
-  ## Description
+ ## Description
 
   A application which uses mySQL to keep track of employees, roles & departments.
   ## Table of Contents<br>
@@ -31,3 +31,5 @@
     <img src="https://img.shields.io/badge/Release%20Version%20-1.0-green"/></>
     <a>
     </p>
+<hr>
+![Employee Tracker GIF of app in action](https://github.com/dcashdallas/HW-12-EmployeeTracker/blob/master/assets/employeetracker.gif?raw=true)

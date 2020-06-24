@@ -33,6 +33,8 @@ CREATE TABLE department
             (30),
   last_name VARCHAR
             (30),
+  role_title VARCHAR
+			(30),
   role_id INTEGER,
   manager_id INTEGER,
   FOREIGN KEY

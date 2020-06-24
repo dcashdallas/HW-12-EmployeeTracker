@@ -1,5 +1,4 @@
 var inquirer = require("inquirer");
-var mysql = require("mysql");
 var Database = require("./async-db");
 const chalk = require('chalk');
 
@@ -63,9 +62,9 @@ async function userPrompt() {
                 message: "What would you like to do?",
                 name: "action",
                 choices: [
+                    "View all employees",
                     "View all departments",
                     "View all roles",
-                    "View all employees",
                     "Add employee",
                     "Add role",
                     "Add department",

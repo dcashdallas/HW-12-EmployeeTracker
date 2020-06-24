@@ -32,4 +32,5 @@
     <a>
     </p>
 <hr>
-![Employee Tracker GIF of app in action](https://github.com/dcashdallas/HW-12-EmployeeTracker/blob/master/assets/employeetracker.gif?raw=true)
+
+![Farmers Market Finder Demo](https://github.com/dcashdallas/HW-12-EmployeeTracker/blob/master/assets/employeetracker.gif?raw=true)

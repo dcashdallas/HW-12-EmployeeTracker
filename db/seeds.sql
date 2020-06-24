@@ -16,11 +16,7 @@ INSERT into department
     (name)
 VALUES
     ("Danger Emissions");
-INSERT into department
-    (name)
-VALUES
-    ("Executives");
-    
+
 
 -- Roles 
 
@@ -47,64 +43,64 @@ VALUES
 INSERT into role
     (title, salary, department_id)
 VALUES
-    ("Safety Inspectors", 30000, 5);
+    ("Safety Inspector", 30000, 3);
 
 
 
 -- Employees
 
 INSERT into employee
-    (first_name, last_name, role_title, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
     ("Charles Montgomery", "Burns", "CEO", null);
 
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Waylon", "Smithers", 2, null);
+    ("Waylon", "Smithers", "CEO", "Charles Montgomery Burns");
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Lenny", "Leonard", 2, 1);
+    ("Lenny", "Leonard", "CEO", "Waylon Smithers");
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Carl", "Carlson", 2, 1);
+    ("Carl", "Carlson", "CEO", "Waylon Smithers");
 
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Barry", "Macklebarry", 3, null);
+    ("Barry", "Macklebarry", "CEO", "Waylon Smithers");
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Chip", "Davis", 4, 3);
+    ("Chip", "Davis", "CEO", "Waylon Smithers");
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Don", "Bookner", 4, 3);
+    ("Don", "Bookner", "CEO", "Waylon Smithers");
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Inanimate Carbon", "Rod", 4, 3);
+    ("Inanimate Carbon", "Rod", "CEO", "Waylon Smithers");
 
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Pops", "Freshenmeyer", 4, null);
+    ("Pops", "Freshenmeyer", "CEO", "Waylon Smithers");
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Zutroy", "Zutroy", 3, null);
+    ("Zutroy", "Zutroy", "CEO", "Waylon Smithers");
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Frank", "Grimes", 4, null);
+    ("Frank", "Grimes", "CEO", "Waylon Smithers");
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Mindy", "Simmons", 4, null);
+    ("Mindy", "Simmons", "CEO", "Waylon Smithers");
 INSERT into employee
-    (first_name, last_name, role_id, manager_id)
+    (First_Name, Last_Name, Role_Title, Manager_Name)
 VALUES
-    ("Canary M.", "Burns", 4, null);
+    ("Canary M.", "Burns", "CEO", "Waylon Smithers");
